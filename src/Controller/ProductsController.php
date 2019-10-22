@@ -116,21 +116,59 @@ class ProductsController extends AppController
      */
     public function search()
     {
-        $this->paginate = [
-            'contain' => ['Categories'],
-            'order' => ['product_name asc']
-        ];
-        $products = $this->paginate($this->Products);
-
-        $this->set(compact('products'));
-
-        if($this->request->getData('productSearch')!='')
+        /*
+        if($this->request->getData('name_search')!='')
         {
             $products = $this->Products->find('all')
-                ->where(['product LIKE' => "%" .
-                    $this->request->getData('productSearch') . "%"])
-                ->order(['product' => 'asc'])
+                ->where(['product_name LIKE' => "%" .
+                    $this->request->getData('name_search') . "%"])
+                ->order(['product_name' => 'asc'])
                 ->contain(['Categories']);
         }
+        if($this->request->getData('name_search')!= '' &&
+            $this->request->getData('price') != '')
+        {
+            $products = $this->Products->find('all')
+                ->where(['product_name LIKE' => "%" .
+                    $this->request->getData('name_search') . "%",
+                    'product_price <' => $this->request->getData('price')])
+                ->order(['product_name' => 'asc'])
+                ->contain(['Categories']);
+        }
+        */
+        if($this->request->getData('name_search')!= '' ||
+            $this->request->getData('price') != '')
+        {
+            if($this->request->getData('price') == ''){
+                $products = $this->Products->find('all')
+                    ->where(['product_name LIKE' => "%" .
+                        $this->request->getData('name_search') . "%"])
+                    ->order(['product_name' => 'asc'])
+                    ->contain(['Categories']);
+            }
+            elseif ($this->request->getData('name_search') == ''){
+                $products = $this->Products->find('all')
+                    ->where(['product_price <=' => $this->request->getData('price')])
+                    ->order(['product_name' => 'asc'])
+                    ->contain(['Categories']);
+            }
+            else{
+            $products = $this->Products->find('all')
+                ->where(['product_name LIKE' => "%" .
+                    $this->request->getData('name_search') . "%",
+                    'product_price <=' => $this->request->getData('price')])
+                ->order(['product_name' => 'asc'])
+                ->contain(['Categories']);
+            }
+        }
+        else {
+            $this->paginate = [
+                'contain' => ['Categories'],
+                'order' => ['product_name asc']
+            ];
+            $products = $this->paginate($this->Products);
+            //$this->set(compact('products'));
+        }
+        $this->set(compact('products'));
     }
 }

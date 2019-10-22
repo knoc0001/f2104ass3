@@ -7,6 +7,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('Search Products'), ['action' => 'search']) ?></li>
         <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
@@ -17,9 +18,7 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('product_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('product_name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('product_desc') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('product_origin') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('product_price') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('category_id') ?></th>
@@ -29,9 +28,7 @@
         <tbody>
             <?php foreach ($products as $product): ?>
             <tr>
-                <td><?= $this->Number->format($product->product_id) ?></td>
                 <td><?= h($product->product_name) ?></td>
-                <td><?= h($product->product_desc) ?></td>
                 <td><?= h($product->product_origin) ?></td>
                 <td><?= $this->Number->format($product->product_price) ?></td>
                 <td><?= $product->has('category') ? $this->Html->link($product->category->category_name, ['controller' => 'Categories', 'action' => 'view', $product->category->category_name]) : '' ?></td>

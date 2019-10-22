@@ -9,6 +9,7 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Product'), ['action' => 'edit', $product->product_id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Product'), ['action' => 'delete', $product->product_id], ['confirm' => __('Are you sure you want to delete # {0}?', $product->product_id)]) ?> </li>
+        <li><?= $this->Html->link(__('Search Products'), ['action' => 'search']) ?></li>
         <li><?= $this->Html->link(__('List Products'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?> </li>
@@ -23,20 +24,12 @@
             <td><?= h($product->product_name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Product Desc') ?></th>
-            <td><?= h($product->product_desc) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Product Origin') ?></th>
             <td><?= h($product->product_origin) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Category') ?></th>
             <td><?= $product->has('category') ? $this->Html->link($product->category->category_name, ['controller' => 'Categories', 'action' => 'view', $product->category->category_name]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Product Id') ?></th>
-            <td><?= $this->Number->format($product->product_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Product Price') ?></th>

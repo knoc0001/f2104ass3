@@ -13,6 +13,7 @@
                 ['confirm' => __('Are you sure you want to delete # {0}?', $product->product_id)]
             )
         ?></li>
+        <li><?= $this->Html->link(__('Search Products'), ['action' => 'search']) ?></li>
         <li><?= $this->Html->link(__('List Products'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
@@ -24,7 +25,6 @@
         <legend><?= __('Edit Product') ?></legend>
         <?php
             echo $this->Form->control('product_name');
-            echo $this->Form->control('product_desc');
             echo $this->Form->control('product_origin');
             echo $this->Form->control('product_price');
             echo $this->Form->control('category_id', ['options' => $categories, 'empty' => true]);
