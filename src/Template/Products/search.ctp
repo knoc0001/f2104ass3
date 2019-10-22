@@ -16,17 +16,20 @@
 </nav>
 
 <div class="products form large-9 medium-8 columns content">
-    <?= $this->Form->create() ?>
+    <?= $this->Form->create(/*['novalidate'=>true]*/) ?>
     <fieldset>
         <legend><?= 'Search Products' ?></legend>
         <?php
-        echo $this->Form->control('name_search');
-        echo $this->Form->control('price');
+        echo $this->Form->control('Country_of_Origin');
+        echo $this->Form->control('Sale_Price');
+        echo $this->Form->control('Category_Name');
         ?>
     </fieldset>
-    <?= $this->Form->button('Search') ?>
+    <?= $this->Form->button(__('Search')) ?>
     <?= $this->Form->end() ?>
+</div>
 
+<div class="products table large-9 medium-8 columns content">
     <h3><?= __('Products') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>

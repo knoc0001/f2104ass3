@@ -116,59 +116,45 @@ class ProductsController extends AppController
      */
     public function search()
     {
-        /*
-        if($this->request->getData('name_search')!='')
-        {
-            $products = $this->Products->find('all')
-                ->where(['product_name LIKE' => "%" .
-                    $this->request->getData('name_search') . "%"])
-                ->order(['product_name' => 'asc'])
-                ->contain(['Categories']);
-        }
-        if($this->request->getData('name_search')!= '' &&
-            $this->request->getData('price') != '')
-        {
-            $products = $this->Products->find('all')
-                ->where(['product_name LIKE' => "%" .
-                    $this->request->getData('name_search') . "%",
-                    'product_price <' => $this->request->getData('price')])
-                ->order(['product_name' => 'asc'])
-                ->contain(['Categories']);
-        }
-        */
-        if($this->request->getData('name_search')!= '' ||
-            $this->request->getData('price') != '')
-        {
-            if($this->request->getData('price') == ''){
-                $products = $this->Products->find('all')
-                    ->where(['product_name LIKE' => "%" .
-                        $this->request->getData('name_search') . "%"])
-                    ->order(['product_name' => 'asc'])
-                    ->contain(['Categories']);
+        if ($this->request->is('post')) {
+            if ($this->request->getData('Country_of_Origin') != '' ||
+                $this->request->getData('Sale_Price') != ''
+                //|| $this->request->getData('Category_Name')
+            ) {
+                if ($this->request->getData('Sale_Price') == '') {
+                    $products = $this->Products->find('all')
+                        ->where(['product_origin LIKE' => "%" .
+                            $this->request->getData('Country_of_Origin') . "%"])
+                        ->order(['product_name' => 'asc'])
+                        ->contain(['Categories']);
+                } elseif ($this->request->getData('Country_of_Origin') == '') {
+                    $products = $this->Products->find('all')
+                        ->where(['product_price <=' => $this->request->getData('Sale_Price')])
+                        ->order(['product_name' => 'asc'])
+                        ->contain(['Categories']);
+                } else {
+                    $products = $this->Products->find('all')
+                        ->where(['product_origin LIKE' => "%" .
+                            $this->request->getData('Country_of_Origin') . "%",
+                            'product_price <=' => $this->request->getData('Sale_Price')])
+                        ->order(['product_name' => 'asc'])
+                        ->contain(['Categories']);
+                }
+            } else {
+                // The below line returns an empty search.
+                $products = $this->Products;
+
+                $this->Flash->error(__('Please complete at least one search field.'));
             }
-            elseif ($this->request->getData('name_search') == ''){
-                $products = $this->Products->find('all')
-                    ->where(['product_price <=' => $this->request->getData('price')])
-                    ->order(['product_name' => 'asc'])
-                    ->contain(['Categories']);
-            }
-            else{
-            $products = $this->Products->find('all')
-                ->where(['product_name LIKE' => "%" .
-                    $this->request->getData('name_search') . "%",
-                    'product_price <=' => $this->request->getData('price')])
-                ->order(['product_name' => 'asc'])
-                ->contain(['Categories']);
-            }
+            $this->set(compact('products'));
         }
-        else {
+        else{
             $this->paginate = [
                 'contain' => ['Categories'],
                 'order' => ['product_name asc']
             ];
             $products = $this->paginate($this->Products);
-            //$this->set(compact('products'));
+            $this->set(compact('products'));
         }
-        $this->set(compact('products'));
     }
 }
