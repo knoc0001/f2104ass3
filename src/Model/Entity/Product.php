@@ -6,14 +6,9 @@ use Cake\ORM\Entity;
 /**
  * Product Entity
  *
- * @property int $product_id
- * @property string $product_name
- * @property string|null $product_desc
- * @property string|null $product_origin
- * @property float $product_price
- * @property int|null $category_id
+ * @property int $placeholder
  *
- * @property \App\Model\Entity\Category $category
+ * @property \App\Model\Entity\Product[] $products
  */
 class Product extends Entity
 {
@@ -27,11 +22,6 @@ class Product extends Entity
      * @var array
      */
     protected $_accessible = [
-        'product_name' => true,
-        'product_desc' => true,
-        'product_origin' => true,
-        'product_price' => true,
-        'category_id' => true,
-        'category' => true
+        'products' => true
     ];
 }
