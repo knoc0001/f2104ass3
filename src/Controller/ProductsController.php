@@ -116,6 +116,13 @@ class ProductsController extends AppController
      */
     public function search()
     {
+        $this->paginate = [
+            'contain' => ['Categories'],
+            'order' => ['product_name asc']
+        ];
+        $products = $this->paginate($this->Products);
+        $this->set(compact('products'));
+
         if ($this->request->is('post')) {
             if ($this->request->getData('Country_of_Origin') != '' ||
                 $this->request->getData('Sale_Price') != '' ||
@@ -186,13 +193,8 @@ class ProductsController extends AppController
             }
             // For no searches
             else {
-                // The below line returns the full list.
-                $this->paginate = [
-                    'contain' => ['Categories'],
-                    'order' => ['product_name asc']
-                ];
-                $products = $this->paginate($this->Products);
-                $this->set(compact('products'));
+                // The below line returns an empty search.
+                //$products = $this->Products;
 
                 $this->Flash->error(__('Please complete at least one search field.'));
             }
