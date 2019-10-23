@@ -45,11 +45,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <ul class="right">
                 <li><?= $this->Html->link(__('List Products'), ['action' => 'index']) ?></li>
                 <li><?= $this->Html->link(__('Search Products'), ['action' => 'search']) ?></li>
-                <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
                 <!--
+                <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
+
                 <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
-                
+
                 <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
                 <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
                 -->

@@ -21,7 +21,7 @@
         <?php
         echo $this->Form->control('Country_of_Origin');
         echo $this->Form->control('Sale_Price');
-        echo $this->Form->control('Category_Name');
+        echo $this->Form->control('Category');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Search')) ?>

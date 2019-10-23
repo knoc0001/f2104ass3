@@ -118,21 +118,53 @@ class ProductsController extends AppController
     {
         if ($this->request->is('post')) {
             if ($this->request->getData('Country_of_Origin') != '' ||
-                $this->request->getData('Sale_Price') != ''
-                //|| $this->request->getData('Category_Name')
+                $this->request->getData('Sale_Price') != '' ||
+                $this->request->getData('Category') != ''
             ) {
-                if ($this->request->getData('Sale_Price') == '') {
+                // For searching country of origin.
+                if (($this->request->getData('Sale_Price') == '') && ($this->request->getData('Category') == '')) {
                     $products = $this->Products->find('all')
                         ->where(['product_origin LIKE' => "%" .
                             $this->request->getData('Country_of_Origin') . "%"])
                         ->order(['product_name' => 'asc'])
                         ->contain(['Categories']);
-                } elseif ($this->request->getData('Country_of_Origin') == '') {
+                }
+                // For searching sales price.
+                elseif (($this->request->getData('Country_of_Origin') == '') && ($this->request->getData('Category') == '')) {
                     $products = $this->Products->find('all')
                         ->where(['product_price <=' => $this->request->getData('Sale_Price')])
                         ->order(['product_name' => 'asc'])
                         ->contain(['Categories']);
-                } else {
+                }
+                // For searching category.
+                elseif (($this->request->getData('Country_of_Origin') == '') && ($this->request->getData('Sale_Price') == '')) {
+                    $products = $this->Products->find('all')
+                        ->where(['Categories.category_name LIKE' => "%" .
+                            $this->request->getData('Category') . "%"])
+                        ->order(['product_name' => 'asc'])
+                        ->contain(['Categories']);
+                }
+                // For searching country + category.
+                elseif ($this->request->getData('Sale_Price') == '') {
+                    $products = $this->Products->find('all')
+                        ->where(['product_origin LIKE' => "%" .
+                            $this->request->getData('Country_of_Origin') . "%",
+                            'Categories.category_name LIKE' => "%" .
+                                $this->request->getData('Category') . "%"])
+                        ->order(['product_name' => 'asc'])
+                        ->contain(['Categories']);
+                }
+                // For searching sales + category.
+                elseif ($this->request->getData('Country_of_Origin') == '') {
+                    $products = $this->Products->find('all')
+                        ->where(['product_price <=' => $this->request->getData('Sale_Price'),
+                            'Categories.category_name LIKE' => "%" .
+                            $this->request->getData('Category') . "%"])
+                        ->order(['product_name' => 'asc'])
+                        ->contain(['Categories']);
+                }
+                // For country + price.
+                elseif ($this->request->getData('Category') == ''){
                     $products = $this->Products->find('all')
                         ->where(['product_origin LIKE' => "%" .
                             $this->request->getData('Country_of_Origin') . "%",
@@ -140,7 +172,20 @@ class ProductsController extends AppController
                         ->order(['product_name' => 'asc'])
                         ->contain(['Categories']);
                 }
-            } else {
+                // For all three used.
+                else{
+                    $products = $this->Products->find('all')
+                        ->where(['product_origin LIKE' => "%".
+                            $this->request->getData('Country_of_Origin') ."%",
+                            'product_price <=' => $this->request->getData('Sale_Price'),
+                            'Categories.category_name LIKE' => "%" .
+                                $this->request->getData('Category') . "%"])
+                            ->order(['product_name' => 'asc'])
+                            ->contain(['Categories']);
+                }
+            }
+            // For no searches
+            else {
                 // The below line returns an empty search.
                 $products = $this->Products;
 
