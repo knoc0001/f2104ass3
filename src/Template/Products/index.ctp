@@ -4,6 +4,16 @@
  * @var \App\Model\Entity\Product[]|\Cake\Collection\CollectionInterface $products
  */
 ?>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <?php $this->Html->css("styles.css"); ?>
+</head>
+
+<body style="background-color: lemonchiffon;">
+
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -13,10 +23,12 @@
         <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="products index large-9 medium-8 columns content">
-    <h3><?= __('Products') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
+-->
+
+<div class="products index large-9 medium-8 columns content" style="width: 100%;">
+    <h2 style="color: olive;"><?= __('Products') ?></h2>
+    <table class="table table-striped table-hover" style="background-color: aliceblue;">
+        <thead style="background-color: lightblue;">
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('product_name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('product_origin') ?></th>
@@ -52,3 +64,5 @@
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
+
+</body>

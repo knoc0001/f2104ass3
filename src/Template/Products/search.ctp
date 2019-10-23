@@ -5,20 +5,19 @@
  */
 ?>
 
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Products'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+<html>
+<head>
+    <!--
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    -->
+</head>
 
-<div class="products form large-9 medium-8 columns content">
+<body style="background-color: lemonchiffon;">
+
+<div class="products form large-9 medium-8 columns content" style="width: 80%; padding-left: 25%;">
     <?= $this->Form->create(/*['novalidate'=>true]*/) ?>
     <fieldset>
-        <legend><?= 'Search Products' ?></legend>
+        <h3 style="color: olive;">Search Products</h3>
         <?php
         echo $this->Form->control('Country_of_Origin');
         echo $this->Form->control('Sale_Price');
@@ -27,11 +26,17 @@
     </fieldset>
     <?= $this->Form->button(__('Search')) ?>
     <?= $this->Form->end() ?>
-</div>
 
-<div class="products table large-9 medium-8 columns content">
-    <h3><?= __('Products') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <br>
+    <br>
+    <br>
+    <br>
+
+</div>
+<div class="products table large-9 medium-8 columns content" style="width: 100%;">
+
+    <h3 style="color: olive;"><?= __('Products') ?></h3>
+    <table align="left" class="table table-striped table-hover" style="background-color: aliceblue;">
         <thead>
         <tr>
             <th scope="col"><?= $this->Paginator->sort('product_name') ?></th>
@@ -52,3 +57,6 @@
         </tbody>
     </table>
 </div>
+
+</body>
+</html>

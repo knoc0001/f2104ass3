@@ -4,19 +4,19 @@
  * @var \App\Model\Entity\Product $product
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Search Products'), ['action' => 'search']) ?></li>
-        <li><?= $this->Html->link(__('List Products'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="products form large-9 medium-8 columns content">
+<html>
+<head>
+    <!--
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    -->
+</head>
+
+<body style="background-color: lemonchiffon;">
+
+<div class="products form large-9 medium-8 columns content" style="width: 100%;">
     <?= $this->Form->create($product, ['novalidate'=>true]) ?>
     <fieldset>
-        <legend><?= __('Add Product') ?></legend>
+        <h3 style="color: olive;">Add Product</h3>
         <?php
             echo $this->Form->control('product_name');
             echo $this->Form->control('product_origin');
@@ -27,3 +27,6 @@
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
+
+</body>
+</html>

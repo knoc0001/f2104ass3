@@ -28,6 +28,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('style.css') ?>
+    <?php $this->Html->css("styles.css"); ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -37,13 +38,21 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
+                <h1 style="font-size: 30px;"><?= $this->Html->link(__('Famox'), ['action' => 'index']) ?></h1>
             </li>
         </ul>
         <div class="top-bar-section">
             <ul class="right">
+                <li><?= $this->Html->link(__('List Products'), ['action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('Search Products'), ['action' => 'search']) ?></li>
+                <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
+                <!--
+                <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
+                
                 <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
                 <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
+                -->
             </ul>
         </div>
     </nav>
