@@ -186,8 +186,13 @@ class ProductsController extends AppController
             }
             // For no searches
             else {
-                // The below line returns an empty search.
-                $products = $this->Products;
+                // The below line returns the full list.
+                $this->paginate = [
+                    'contain' => ['Categories'],
+                    'order' => ['product_name asc']
+                ];
+                $products = $this->paginate($this->Products);
+                $this->set(compact('products'));
 
                 $this->Flash->error(__('Please complete at least one search field.'));
             }
