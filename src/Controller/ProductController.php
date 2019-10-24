@@ -17,6 +17,7 @@ class ProductController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
+
     public function index()
     {
         $product = $this->paginate($this->Product);
