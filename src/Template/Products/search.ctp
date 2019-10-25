@@ -15,7 +15,7 @@
 <body style="background-color: lemonchiffon;">
 
 <div class="products form large-9 medium-8 columns content" style="width: 80%; padding-left: 25%;">
-    <?= $this->Form->create(/*['novalidate'=>true]*/) ?>
+    <?= $this->Form->create(/*$search, ['novalidate'=>true]*/) ?>
     <fieldset>
         <h3 style="color: olive;">Search Products</h3>
         <?php
@@ -57,6 +57,7 @@
         </tbody>
     </table>
 
+    <!--
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
@@ -65,9 +66,11 @@
             <?= $this->Paginator->next(__('next') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
-
+        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
+-->
+
 
 </body>
 </html>

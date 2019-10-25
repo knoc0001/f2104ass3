@@ -116,11 +116,17 @@ class ProductsController extends AppController
      */
     public function search()
     {
+        // shows 50 records per page.
+        $settings = [
+            'limit' => 50,
+            'maxLimit' => 100
+        ];
+
         $this->paginate = [
             'contain' => ['Categories'],
             'order' => ['product_name asc']
         ];
-        $products = $this->paginate($this->Products);
+        $products = $this->paginate($this->Products, $settings);
         $this->set(compact('products'));
 
         if ($this->request->is('post')) {
@@ -201,11 +207,13 @@ class ProductsController extends AppController
             $this->set(compact('products'));
         }
         else{
+            //$results = $paginator->paginate($table, $settings);
+
             $this->paginate = [
                 'contain' => ['Categories'],
-                'order' => ['product_name asc']
+                'order' => ['product_name asc'],
             ];
-            $products = $this->paginate($this->Products);
+            $products = $this->paginate($this->Products, $settings);
             $this->set(compact('products'));
         }
     }

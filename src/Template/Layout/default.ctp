@@ -43,9 +43,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </ul>
         <div class="top-bar-section">
             <ul class="right">
-                <li><?= $this->Html->link(__('List Products'), ['controller'=>'Products', 'action' => 'index']) ?></li>
+
                 <li><?= $this->Html->link(__('Search Products'), ['controller'=>'Products', 'action' => 'search']) ?></li>
                 <!--
+                <li><?= $this->Html->link(__('List Products'), ['controller'=>'Products', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
 
                 <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
